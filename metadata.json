@@ -5,7 +5,7 @@
   "summary": "ProFTPd + MySQL",
   "license": "Licensed under (Apache 2.0)",
   "source": "https://bitbucket.org/iwithorg/puppet-proftpd",
-  "project_page": "https://forge.puppetlabs.com/joduba/joduba-proftpd",
+  "project_page": "https://forge.puppetlabs.com/joduba/proftpd",
   "issues_url": "https://bitbucket.org/iwithorg/puppet-proftpd/issues",
   "tags": ["proftpd", "proftpd-mysql"],
   "operatingsystem_support": [
