@@ -1,0 +1,60 @@
+# Proftpd sample configuration for SQL-based authentication.
+#
+# (This is not to be used if you prefer a PAM-based SQL authentication)
+#
+
+<IfModule mod_sql.c>
+#
+# Choose a SQL backend among MySQL or PostgreSQL.
+# Both modules are loaded in default configuration, so you have to specify the backend 
+# or comment out the unused module in /etc/proftpd/modules.conf.
+# Use 'mysql' or 'postgres' as possible values.
+#
+SQLBackend     <%= @sqlBackend %>
+
+#Passwords in MySQL are encrypted using CRYPT
+SQLAuthTypes            <%= @sqlAuthTypes %>
+SQLAuthenticate         <%= @sqlAuthenticate %>
+
+# used to connect to the database
+# databasename@host database_user user_password
+SQLConnectInfo  <%= @sqldbname %>@<%= @sqldbhost %> <%= @sqldbuser %> <%= @sqldbpass %>
+
+
+# Use ftp_users.id as the user primary key
+SQLUserPrimaryKey <%= @sqlUserPrimaryKey %>
+
+# Here we tell ProFTPd the names of the database columns in the "usertable"
+# we want it to interact with. Match the names with those in the db
+SQLUserInfo     <%= @sqlUserInfo %>
+
+#UID and GID defaults
+SQLDefaultGID   <%= @sqlDefaultGID %>
+SQLDefaultUID   <%= @sqlDefaultUID %>
+
+# Here we tell ProFTPd the names of the database columns in the "grouptable"
+# we want it to interact with. Again the names match with those in the db
+SQLGroupInfo    <%= @sqlGroupInfo %>
+
+# set min UID and GID - otherwise these are DefaultGID/DefaultUID
+SQLMinID        <%= @sqlMinID %>
+
+# Update count every time user logs in
+<% if !@sqlLogUpdatecountQuery.empty? %>
+SQLLog PASS updatecount
+SQLNamedQuery updatecount <%= @sqlLogUpdatecountQuery %>
+<% end %>
+
+# Update modified everytime user uploads or deletes a file
+<% if !@sqlLogModifiedQuery.empty? %>
+SQLLog  STOR,DELE modified
+SQLNamedQuery modified <%= @sqlLogModifiedQuery %>
+<% end %>
+
+SqlLogFile <%= @sqlLogFile %>
+
+<% @directives.sort_by {|key,value| key}.each do |key,value| -%>
+<%= key %>=<%= value %>
+<% end -%>
+
+</IfModule>

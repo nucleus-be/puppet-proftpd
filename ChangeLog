@@ -1,0 +1,5 @@
+2014-11-14 - 0.0.1
+* Install proftpd
+* Support for mod_sql
+* puppet module install joduba-proftpd
+
