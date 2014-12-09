@@ -266,6 +266,7 @@ class proftpd (
     group   => 0,
     mode    => '0644',
     content => "${displayConnectContent}",
+    require => Package[$package_name],
   }
 
   file { "${confdir}/modules.conf":
@@ -274,6 +275,7 @@ class proftpd (
     group   => 0,
     mode    => '0644',
     source  => 'puppet:///modules/proftpd/modules.conf',
+    require => Package[$package_name],
   }
 
   file { "${confdir}/proftpd.conf":
