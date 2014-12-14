@@ -1,6 +1,6 @@
 {
   "name": "joduba-proftpd",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Joduba - Jordi Duran Batidor",
   "summary": "Puppet module for ProFTPd + proftpd mod MySQL",
   "license": "Licensed under (Apache 2.0)",

@@ -141,8 +141,8 @@ class proftpd::mod_sql (
   $sqlDefaultGID   			= 33,
   $sqlDefaultUID   			= 33,
   $sqlMinID     			= 500,
-  $sqlLogUpdatecountQuery	= 'updatecount UPDATE "count=count+1, accessed=now() WHERE userid=\'%u\'" ftpuser',
-  $sqlLogModifiedQuery		= 'modified UPDATE "modified=now() WHERE userid=\'%u\'" ftpuser',
+  $sqlLogUpdatecountQuery	= 'UPDATE "count=count+1, accessed=now() WHERE userid=\'%u\'" ftpuser',
+  $sqlLogModifiedQuery		= 'UPDATE "modified=now() WHERE userid=\'%u\'" ftpuser',
   $sqlLogFile 				= "/var/log/proftpd/sql.log",
 
   $directives              = {},
