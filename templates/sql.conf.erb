@@ -53,7 +53,9 @@ SQLNamedQuery modified <%= @sqlLogModifiedQuery %>
 
 SqlLogFile <%= @sqlLogFile %>
 
+#Other directives below
 <% @directives.sort_by {|key,value| key}.each do |key,value| -%>
 <%= key %>=<%= value %>
 <% end -%>
+
 </IfModule>
