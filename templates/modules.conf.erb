@@ -15,6 +15,13 @@ ModuleControlsACLs lsmod allow user *
 LoadModule mod_ctrls_admin.c
 LoadModule mod_tls.c
 
+<% @load_modules.keys.each do |loaded_module| -%>
+        <% if loaded_module=="mod_sql" %>
+LoadModule mod_sql.c
+LoadModule mod_sql_mysql.c
+        <% end %>
+<% end -%>
+
 # Install one of proftpd-mod-mysql, proftpd-mod-pgsql or any other
 # SQL backend engine to use this module and the required backend.
 # This module must be mandatory loaded before anyone of

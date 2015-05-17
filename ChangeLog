@@ -1,3 +1,6 @@
+2015-05-17 - 0.0.7
+* Improvement: reorganized the code to ensure the modules.conf does not get updated on every puppet call
+
 2014-12-14 - 0.0.3
 * Fix: mod_sql sqlLogUpdatecountQuery and sqlLogModifiedQuery syntax error
 

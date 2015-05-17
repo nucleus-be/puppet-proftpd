@@ -247,6 +247,7 @@ class proftpd (
   $adminControlsEngine 		= 'off',
   $passivePorts				= '',
   $masqueradeAddress		= '',
+  $load_modules				= {},
 
   $directives              = {},
 ) inherits ::proftpd::params {
@@ -258,6 +259,7 @@ class proftpd (
     enable    => true,
     ensure    => running,
     hasstatus => true,
+    hasrestart => true,
   }
 
   file { "${displayConnect}":
@@ -274,8 +276,40 @@ class proftpd (
     owner   => 0,
     group   => 0,
     mode    => '0644',
-    source  => 'puppet:///modules/proftpd/modules.conf',
+    content => template('proftpd/modules.conf.erb'),
     require => Package[$package_name],
+	notify  => Service[$service_name],    
+  }
+
+  if $::proftpd::load_modules {
+  	$::proftpd::load_modules.each |$index, $value| { 
+	  	if $index == "mod_sql" {
+		  	notice ("Installing mod_sql")
+			class { '::proftpd::mod_sql':
+			    sqldbhost => $value['sqldbhost'],
+			    sqldbname => $value['sqldbname'],
+			    sqldbuser => $value['sqldbuser'],
+			    sqldbpass => $value['sqldbpass'],
+
+				template => $value['template'],
+				sqlBackend => $value['sqlBackend'],
+				sqlAuthTypes => $value['sqlAuthTypes'],
+				sqlAuthenticate => $value['sqlAuthenticate'],
+				sqlUserPrimaryKey => $value['sqlUserPrimaryKey'],
+				sqlUserInfo => $value['sqlUserInfo'],
+				sqlGroupInfo => $value['sqlGroupInfo'],
+				sqlDefaultGID => $value['sqlDefaultGID'],
+				sqlDefaultUID => $value['sqlDefaultUID'],
+				sqlMinID => $value['sqlMinID'],
+				sqlLogUpdatecountQuery => $value['sqlLogUpdatecountQuery'],
+				sqlLogModifiedQuery => $value['sqlLogModifiedQuery'],
+				sqlLogFile => $value['sqlLogFile'],
+				directives => $value['directives'],
+
+				notify  => Service[$service_name],
+			}
+	  	}
+  	}
   }
 
   file { "${confdir}/proftpd.conf":
@@ -285,4 +319,3 @@ class proftpd (
   }
 
 }
-

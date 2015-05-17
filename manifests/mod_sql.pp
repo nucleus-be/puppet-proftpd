@@ -153,11 +153,6 @@ class proftpd::mod_sql (
 		require => Package[$package_name],
 	}
 	
-	file_line {'Load SQL module':
-	    path => "${confdir}/modules.conf",
-	    line => "LoadModule mod_sql.c\nLoadModule mod_sql_mysql.c",
-	}
-	
 	file { "${confdir}/conf.d/sql.conf":
 		require => Package[$mod_package_name],
 		content => template($template),
@@ -167,4 +162,3 @@ class proftpd::mod_sql (
 
 
 }
-

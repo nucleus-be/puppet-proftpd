@@ -14,6 +14,7 @@ class proftpd::params {
   $package_name = 'proftpd'
   $service_name = 'proftpd'
   $package_name_mod_sql = 'proftpd-mod-mysql'
+  $load_modules = {}
 
   case $::operatingsystem {
     default: {
