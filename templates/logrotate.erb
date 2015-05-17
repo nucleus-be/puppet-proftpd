@@ -1,0 +1,15 @@
+<%= @sqlLogFile %>
+{
+        weekly
+        missingok
+        rotate 7
+        compress
+        delaycompress
+        notifempty
+        create 640 root adm
+        sharedscripts
+        postrotate
+                # reload could be not sufficient for all logs, a restart is safer
+                invoke-rc.d proftpd restart 2>/dev/null >/dev/null || true
+        endscript
+}

@@ -1,4 +1,7 @@
-2015-05-17 - 0.0.7
+2015-05-17 - 0.0.5
+* Improvement: Added log rotate for mod_sql
+
+2015-05-17 - 0.0.4
 * Improvement: reorganized the code to ensure the modules.conf does not get updated on every puppet call
 
 2014-12-14 - 0.0.3

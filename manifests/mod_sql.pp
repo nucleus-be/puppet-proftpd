@@ -160,5 +160,10 @@ class proftpd::mod_sql (
 	    ensure  => present, 
 	}
 
-
+	file { '/etc/logrotate.d/proftpd-mod_sql':
+		owner   => root,
+		group   => root,
+		mode    => '0444',
+		content => template('proftpd/logrotate.erb'),
+	}
 }
